@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+// PARTIALS
+import Header from "./partials/Header";
+import Sidebar from "./partials/Sidebar";
+import Modal from "./partials/Modal";
 
 function App() {
+  const [modalState, setIsActiveModalState] = useState(false);
+
+  const isActiveModalState = () => {
+    setIsActiveModalState(true);
+  };
+
+  const modalStateFalse = () => {
+    setIsActiveModalState(false);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="relative min-h-screen md:flex" data-dev-hint="container">
+        {/* TOP HEADER  */}
+        <input type="checkbox" id="menu-open" className="hidden" />
+        <Header />
+        {/* ASIDE BAR  */}
+        <Sidebar isActiveModalState={isActiveModalState} />
+        {/* CONTENT CONTAINER */}
+        <div className="w-auto content-container h-full flex-1 flex justify-center items-center m-auto">
+          <h1 className="text-gray-800 text-8xl font-bold">SAILO</h1>
+        </div>
+      </div>
+      {/* MODAL BOX */}
+      <Modal modalState={modalState} modalStateFalse={modalStateFalse} />
     </div>
   );
 }
